@@ -43,6 +43,9 @@
           <a class="brand" href="index.html">Ziptastic!</a>
           <div class="nav-collapse">
             <ul class="nav">
+              <li><a href="demo.html">Demo</a></li>
+              <li><a href="https://github.com/daspecster/ziptastic">Github</a></li>
+              <li><a href="https://github.com/daspecster/ziptastic-jquery-plugin">jQuery Plugin</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -52,39 +55,71 @@
     <div class="container">
 
       <!-- Main hero unit for a primary marketing message or call to action -->
-      <div class="hero-unit">
-        <h1>How to use it!</h1>
-		<p>A simple example of retriving the Country, State, City in JSON format</p>
-		<pre class="prettyprint">
-&lt;script type="text/javascript"&gt;
-	var client = new XMLHttpRequest();
-	client.open("GET", "http://zip.elevenbasetwo.com?zip=48867", true);
-	client.onreadystatechange = function() {
-	  if(client.readyState == 4) {
-		alert(client.responseText);
-	  };
-	};
-	  
-	client.send();
-&lt;/script&gt;</pre>
-
-		<h2>Result:</h2>
-		<pre>{["US", "MI", "OWOSSO"]}</pre>
-        
-
-    <h2>BETA Jquery Plugin!</h2>
-    <p>This plugin is extremely beta and can be modified to fit your needs</p>
-    <p><a href="https://github.com/daspecster/ziptastic-jquery-plugin">Github</a></p>
-        
-		
+      <div class="hero-unit clearfix span">
+        <h1>Ziptastic! Demo</h1>
+        <h2>Example Useage</h2>
+        <p>A simple example of retrieving the Country, State, City in JSON format from the Ziptastic! API.</p>
+        <script>                                
+          $(function() {
+            $("#zippy-do-da").click(function(event) {
+              //Get the entered Zipcode and prevent the buttons default action
+              var zipcodeEntered = $('#ziput').val();
+              event.preventDefault();
+              //Make an AJAX request to the Ziptastic! api.
+              $.get(
+                'http://zip.elevenbasetwo.com?zip=' + zipcodeEntered,
+                function(apiData) {
+                  //Update our output element with the data returned from the api
+                  $('#zippdy-day').text('City: ' + apiData.city + ', State: ' + apiData.state + '. Country: ' + apiData.country)
+                }
+                );
+            });
+          });
+        </script>
+        <div class="row-fluid">
+          <form class="breadcrumb form-horizontal clearfix span11">
+            <fieldset class="span5 pull-left clearfix">
+              <label for="ziput"><i class="icon-black icon-map-marker"></i> Zipcode:</label>
+              <input id="ziput" name="ziput" type="number" placeholder="90210" value="90210" size="5" min="0" max="99999" step="0" pattern="\d{1,5}" class="input-xlarge">
+              <button type="submit" class="btn btn-info"><i class="icon-white icon-ok-sign"></i> Zipit!</button>
+            </fieldset>
+            <fiedset class="span5 pull-right clearfix">
+              <label for="ziput"><i class="icon-black icon-info-sign"></i> Ziptastic API Output:</label>
+              <pre class="popover-content"><output id="zippdy-day" for="ziput" name="zippdy-day">&nbsp;</output></pre> 
+            </fiedset>
+          </form>
+        </div>
+        <hr />
+        <div class="row-fluid clearfix">
+          <h3>Code For Example Above:</h3>
+          <pre class="well linenums prettyprint popover-content uneditable-textarea">$(function() {
+	$(&quot;#zippy-do-da&quot;).click(function(event) {
+		//Get the entered Zipcode and prevent the buttons default action
+	  	var zipcodeEntered = $(&#x27;#ziput&#x27;).val();
+	  	event.preventDefault();
+	  	//Make an AJAX request to the Ziptastic! api.
+	  	$.get(
+	  		&#x27;http://zip.elevenbasetwo.com?zip=&#x27; + zipcodeEntered,
+			function(apiData) {
+				//Update our output element with the data returned from the api
+		  		$(&#x27;#zippdy-day&#x27;).text(&#x27;City: &#x27; + apiData.city + &#x27;, State: &#x27; + apiData.state + &#x27;. Country: &#x27; + apiData.country)
+        	}
+		);
+	});
+});</pre>
+        </div>  
+        <hr />
+        <div class="span12 clearfix">
+          <h2>BETA Jquery Plugin!</h2>
+          <p>This plugin is extremely beta and can be modified to fit your needs</p>
+          <p><a href="https://github.com/daspecster/ziptastic-jquery-plugin">Github</a></p>
+        </div>
       </div>
-
       <hr>
-
       <footer>
         <p>&copy; ElevenBaseTwo 2012</p>
+        <!-- Also Copyright 2012 A.J. Cates for slightly modified content and reworked demo.-->
       </footer>
-
     </div> <!-- /container -->
 
     <!-- Le javascript
